@@ -10,7 +10,7 @@ export default function Protected({children, authentication = true}) {
     useEffect(() => {
         if (authentication && authStatus !== authentication) {
             navigate('/login')
-        } else if(!authentication && authstatus !== authentication) {
+        } else if(!authentication && authStatus !== authentication) {
             navigate('/')
         }
         setLoader(false)

@@ -40,10 +40,9 @@ export class AuthService{
             const user = await this.account.get();
             return user;
         } catch (error) {
-            // console.log("error", error);
-            return null;
-            
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
+        return null; // return null if no user is logged in
         
     }
 
@@ -52,7 +51,7 @@ export class AuthService{
             const response = await this.account.deleteSessions();
             return response;
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: logout :: error", error);
         }
     }
 

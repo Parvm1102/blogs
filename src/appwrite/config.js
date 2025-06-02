@@ -1,6 +1,5 @@
-import { Client, Account, ID, Databases, Storage, Query} from "appwrite";
+import { Client,  ID, Databases, Storage, Query} from "appwrite";
 import config from "../config/config";
-import { transformWithEsbuild } from "vite";
 
 export class Service{
     client = new Client();
@@ -11,8 +10,8 @@ export class Service{
         this.client
             .setEndpoint(config.appwriteURL)
             .setProject(config.appwriteProjectId);
-        this.databases = new Databases(client); 
-        this.bucket = new Storage(client);
+        this.databases = new Databases(this.client); 
+        this.bucket = new Storage(this.client);
     }
 
     async createPost({title, slug, content, featuredImage, status, userId}){ // this method creates a new post
@@ -30,7 +29,7 @@ export class Service{
                 }
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: createPost :: error", error);
         }
     }
 
@@ -48,7 +47,7 @@ export class Service{
                 }
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: updatePost :: error", error);
         }
     }
 
@@ -61,7 +60,8 @@ export class Service{
             )
             return true;
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: deletePost :: error", error);
+            return false
         }
     }
 
@@ -73,7 +73,8 @@ export class Service{
                 slug
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: getPost :: error", error);
+            return false
         }
     }
 
@@ -85,7 +86,7 @@ export class Service{
                 queries
             )
         } catch (error) {
-            throw error;
+            console.error("Error fetching posts:", error);
         }
     }
 
@@ -97,7 +98,8 @@ export class Service{
                 file
             );
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: uploadFile :: error", error);
+            return false
             
         }
     }
@@ -110,7 +112,8 @@ export class Service{
             );
             return true;
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: deleteFile :: error", error);
+            return false
             
         }
     }
@@ -122,7 +125,8 @@ export class Service{
                 fileId
             );
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: getFilePreview :: error", error);
+            
         }
     }
 
