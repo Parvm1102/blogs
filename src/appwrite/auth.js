@@ -42,7 +42,7 @@ export class AuthService{
         } catch (error) {
             console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
-        return null; // return null if no user is logged in
+        //return null; // return null if no user is logged in
         
     }
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import config from './config/config'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
@@ -27,12 +26,17 @@ function App() {
       <div className='w-full block'>
         <Header />
         <main>
-        TODO:  <Outlet />
+        <Outlet />
         </main>
         <Footer />
       </div>
     </div>
-  ) : null
+  ) : 
+  (
+    <div className='w-full h-screen flex justify-center items-center'>
+      <h1 className='text-2xl font-bold text-gray-500'>Loading...</h1>
+    </div>
+  )
 }
 
 export default App
